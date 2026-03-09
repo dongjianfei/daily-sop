@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>我的每日高能SOP</title>
+    <link rel="stylesheet" href="styles.css">
+    <!-- PWA Manifest -->
+    <link rel="manifest" href="manifest.json">
+    <!-- Theme color for browser UI -->
+    <meta name="theme-color" content="#0f1923">
+    <!-- iOS PWA support -->
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="apple-mobile-web-app-title" content="每日SOP">
+</head>
+<body>
+    <div id="app">
+        <!-- 顶部导航 -->
+        <header class="header">
+            <div class="header-left">
+                <h1 class="logo">⚡ 我的每日高能SOP</h1>
+            </div>
+            <nav class="nav-tabs">
+                <button class="nav-btn active" data-tab="sop">📋 每日SOP</button>
+                <button class="nav-btn" data-tab="stats">📊 统计分析</button>
+                <button class="nav-btn" data-tab="reference">📚 参考资料</button>
+            </nav>
+            <div class="header-right">
+                <button class="theme-toggle" id="themeToggle" title="切换主题">🌙</button>
+            </div>
+        </header>
+
+        <!-- 每日SOP页面 -->
+        <main class="tab-content active" id="tab-sop">
+            <div class="sop-header">
+                <div class="date-display" id="currentDate"></div>
+                <div class="progress-container">
+                    <div class="progress-bar">
+                        <div class="progress-fill" id="progressFill"></div>
+                    </div>
+                    <span class="progress-text" id="progressText">0/0 完成</span>
+                </div>
+            </div>
+            <div class="timeline" id="timeline"></div>
+        </main>
+
+        <!-- 统计分析页面 -->
+        <main class="tab-content" id="tab-stats">
+            <div class="stats-container">
+                <div class="stats-controls">
+                    <div class="stats-mode-toggle">
+                        <button class="stats-mode-btn active" data-mode="daily">按日查看</button>
+                        <button class="stats-mode-btn" data-mode="monthly">按月查看</button>
+                    </div>
+                    <div class="stats-selector" id="statsSelector"></div>
+                </div>
+                <div class="stats-content" id="statsContent"></div>
+            </div>
+        </main>
+
+        <!-- 参考资料页面 -->
+        <main class="tab-content" id="tab-reference">
+            <div class="reference-container">
+                <div class="search-box">
+                    <input type="text" id="searchInput" placeholder="🔍 搜索关键词（如：线粒体、镁、睡眠...）">
+                </div>
+                <div class="reference-intro" id="referenceIntro"></div>
+                <div class="accordion" id="accordion"></div>
+            </div>
+        </main>
+    </div>
+
+    <!-- 通知权限提示 -->
+    <div class="notification-prompt" id="notificationPrompt" style="display:none;">
+        <div class="prompt-content">
+            <p>🔔 开启浏览器通知，在关键时刻提醒您执行SOP</p>
+            <button class="btn-primary" id="enableNotification">开启通知</button>
+            <button class="btn-secondary" id="dismissNotification">稍后再说</button>
+        </div>
+    </div>
+
+    <script src="data.js"></script>
+    <script src="app.js"></script>
+    <script>
+      if ('serviceWorker' in navigator) {
+        navigator.serviceWorker.register('./sw.js');
+      }
+    </script>
+</body>
+</html>
